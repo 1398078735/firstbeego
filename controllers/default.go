@@ -73,7 +73,7 @@ func (c *MainController) Post(){
 		c.Ctx.WriteString("数据解析失败")
 		return
 	}
-	fmt.Println("用户名",person.Name,"年龄",person.Age,"性别",person.Sex)
+	fmt.Println("用户名",person.Name,"地址",person.Address,"生日",person.Birthday,"网名",person.Nick)
 	c.Ctx.WriteString("用户名:"+person.Name)
 
 }
