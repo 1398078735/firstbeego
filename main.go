@@ -1,36 +1,16 @@
 package main
 
 import (
+	"beegonew0604/db_mysql"
 	_ "beegonew0604/routers"
-	"database/sql"
-	"fmt"
 	"github.com/astaxie/beego"
 	_ "github.com/go-sql-driver/mysql"
 )
 
+
 func main() {
-	//解析配置选项
-	config :=beego.AppConfig //定义config变量,接收并赋值为全局配置变量
-	//获取配置选项
-	appName := config.String("appname")
-	fmt.Println("项目应用名称",appName)
-	port,err := config.Int("httpport")
-	if err != nil {
-		panic("项目配置信息解析错误")
-	}
-	fmt.Println("应用的监听端口",port)
-
-	driver := config.String("db_driver")
-	dbuser := config.String("db_user")
-	dbpassword:= config.String("db_password")
-	dbip := config.String("db_ip")
-	dbname := config.String("db_name")
-
-	db,err := sql.Open(driver,dbuser+":"+dbpassword+"@tcp("+dbip+")/"+dbname+"?charset=utf8")
-	if err != nil {
-		panic("数据连接失败")
-	}
-	fmt.Println(db)
+	//1，链接数据库
+	db_mysql.Connect()
 
 	beego.Run()
 	//beego框架的配置文件操作:

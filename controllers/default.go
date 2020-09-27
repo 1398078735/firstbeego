@@ -22,7 +22,6 @@ func (c *MainController) Get() {
 	//    "sex" ："famale"
 	//}
 	//后台处理
-
 	//获取get类型请求的请求参数
 	name := c.Ctx.Input.Query("name")
 	fmt.Println("名字为:",name)
