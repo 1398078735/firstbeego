@@ -35,7 +35,6 @@ func Connect(){
 		//早解决，早解决
 		panic("数据库连接错误，请检查配置")
 	}
-	Db = db
 	fmt.Println(db)
 	Db = db
 	//代码封装:可以将重复的代码或者功能相对比较独立的代码，进行封装，以
@@ -51,13 +50,14 @@ func AddUser(u models.User)(int64, error){
 	md5Hash.Write([]byte(u.Password))
 	psswordBytes := md5Hash.Sum(nil)
 	u.Password = hex.EncodeToString(psswordBytes)
-	//execute， .exe
+	//execute， .exe可执行文件
 	result, err :=Db.Exec("insert into usertext(name,birthday,address,password)" +
 		" values(?,?,?,?) ", u.Name,u.Birthday,u.Address,u.Password)
 	if err != nil {
 		return -1,err
 	}
-	row,err := result.RowsAffected()
+	row,err := result.RowsAffected()//用于返回影响数据中几行数据.比如保存了一条数据则
+	//返回1
 	if err != nil {
 		return -1,err
 	}
